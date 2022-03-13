@@ -1,16 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HelloWorld from '../components/HelloWorld.vue'
+import Layout from '../layout/index.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
     redirect: (_) => {
-      return { path: '/home' }
+      return { path: '/personnelManagement' }
     },
   },
   {
-    path: '/home',
-    name: 'HelloWorld',
-    component: HelloWorld,
+    path: '/',
+    component: Layout,
+    children: [{
+      path: '/personnelManagement',
+      name: '人员管理',
+      component: () => import(/* webpackChunkName: "personnelManagement" */ '@/views/personnel-management/index.vue')
+    }]
   },
   {
     path: '/about',
