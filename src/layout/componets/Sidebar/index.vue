@@ -16,6 +16,10 @@
         <el-icon><setting /></el-icon>
         <span>人员设备</span>
       </el-menu-item>
+      <el-menu-item index="3">
+        <el-icon><setting /></el-icon>
+        <span>人员监测</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

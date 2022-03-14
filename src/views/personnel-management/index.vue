@@ -1,9 +1,14 @@
 <template>
   <div class="">
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="Date" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="address" label="Address" />
+      <el-table-column prop="personnelNumber" label="人员编号" width="180" />
+      <el-table-column prop="name" label="姓名" width="180" />
+      <el-table-column prop="gender" label="性别" />
+      <el-table-column prop="phone" label="电话" />
+      <el-table-column prop="age" label="年龄" />
+      <el-table-column prop="address" label="家庭住址" />
+      <el-table-column prop="addTime" label="添加时间" />
+      <el-table-column prop="attribute" label="属性" />
     </el-table>
   </div>
 </template>
@@ -22,25 +27,15 @@ export default defineComponent({
   setup(props, ctx) {
     const tableData = [
       {
-        date: "2016-05-03",
+        personnelNumber: "001",
         name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-      },
-      {
-        date: "2016-05-02",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-      },
-      {
-        date: "2016-05-04",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-      },
-      {
-        date: "2016-05-01",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-      },
+        gender: "",
+        phone: "",
+        age: "",
+        address: "",
+        addTime: "",
+        attribute: ""
+      }
     ];
     return {
       tableData,
