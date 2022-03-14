@@ -2,6 +2,9 @@
     <div class="app-wrapper">
         <sidebar class="sidebar-container" />
         <div class="main-container">
+            <div :class="{'fixed-header': fixedHeader}">
+                <navbar />
+            </div>
             <router-view />
         </div>
     </div>
@@ -9,11 +12,19 @@
 <script lang="ts">
 import { defineComponent, ComputedRef, onMounted, computed, ref, onUnmounted } from 'vue'
 import Sidebar from './componets/Sidebar/index.vue'
+import Navbar from './componets/Navbar/index.vue'
 
 export default defineComponent({
     name: 'Layout',
     components: {
-        Sidebar
+        Sidebar,
+        Navbar
+    },
+    setup(props, ctx) {
+        let fixedHeader = true;
+        return {
+            fixedHeader
+        }
     }
 })
 </script>
@@ -37,6 +48,14 @@ export default defineComponent({
   left: 0;
   z-index: 1001;
   overflow: hidden;
+}
+.fixed-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: calc(100% - 210px);
+  transition: width 0.28s;
 }
 .main-container {
     min-height: 100%;
