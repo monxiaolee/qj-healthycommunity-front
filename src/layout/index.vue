@@ -33,6 +33,7 @@ export default defineComponent({
     position: relative;
     height: 100%;
     width: 100%;
+    // margin-top: 60px;
     content: "";
     display: table;
     clear: both;
@@ -58,9 +59,12 @@ export default defineComponent({
   transition: width 0.28s;
 }
 .main-container {
-    min-height: 100%;
+    height: 100%;
+    padding: 60px 16px 16px;
     transition: margin-left 0.28s;
     margin-left: 210px;
     position: relative;
+    box-sizing: border-box;
+    background-color: #e6e6e6;
 }
 </style>

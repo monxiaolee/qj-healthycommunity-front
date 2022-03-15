@@ -12,7 +12,7 @@
         <el-icon><icon-menu /></el-icon>
         <span>人员管理</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="2">
         <el-icon><setting /></el-icon>
         <span>人员设备</span>
       </el-menu-item>
@@ -57,10 +57,22 @@ export default defineComponent({
 });
 </script>
 
+
+
 <style lang="less" scoped>
 .el-menu {
   border: none;
   height: 100%;
   width: 100% !important;
+  .el-menu-item {
+      height: 40px;
+      line-height: 40px;
+      &.is-active {
+        background-color: #2e6be6;
+        span {
+            color: #fff;
+        }
+      }
+  }
 }
 </style>
