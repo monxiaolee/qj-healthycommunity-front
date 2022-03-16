@@ -23,7 +23,7 @@
         <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
         <el-table-column prop="addTime" label="添加时间" width="120" />
-        <el-table-column prop="attribute" label="属性" width="120"/>
+        <el-table-column prop="attribute" label="操作" width="120"/>
       </el-table>
       <div class="qj-table__footer clear-fix">
         <el-pagination background layout="prev, pager, next" :total="1000" />
@@ -47,6 +47,56 @@ export default defineComponent({
   name: "personnelManagement",
   setup(props, ctx) {
     const tableData = [
+      {
+        personnelNumber: "001",
+        name: "Tom",
+        gender: "",
+        phone: "",
+        age: "",
+        address: "",
+        addTime: "",
+        attribute: "",
+      },
+      {
+        personnelNumber: "001",
+        name: "Tom",
+        gender: "",
+        phone: "",
+        age: "",
+        address: "",
+        addTime: "",
+        attribute: "",
+      },
+      {
+        personnelNumber: "001",
+        name: "Tom",
+        gender: "",
+        phone: "",
+        age: "",
+        address: "",
+        addTime: "",
+        attribute: "",
+      },
+      {
+        personnelNumber: "001",
+        name: "Tom",
+        gender: "",
+        phone: "",
+        age: "",
+        address: "",
+        addTime: "",
+        attribute: "",
+      },
+      {
+        personnelNumber: "001",
+        name: "Tom",
+        gender: "",
+        phone: "",
+        age: "",
+        address: "",
+        addTime: "",
+        attribute: "",
+      },
       {
         personnelNumber: "001",
         name: "Tom",
