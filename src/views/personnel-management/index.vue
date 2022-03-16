@@ -3,26 +3,27 @@
     <div class="qj-layout__card clear-fix">
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="姓名：">
-          <el-input v-model="formInline.name" placeholder="Approved by" />
+          <el-input v-model="formInline.name" placeholder="请输入姓名" />
         </el-form-item>
         <el-form-item label="电话号码：">
-          <el-input v-model="formInline.phone" placeholder="Approved by" />
+          <el-input v-model="formInline.phone" placeholder="请输入电话号码" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSearch">搜索</el-button>
+          <el-button type="success" @click="onAdd">新增</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="qj-layout__card">
-      <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="personnelNumber" label="人员编号" width="180" />
-        <el-table-column prop="name" label="姓名" width="180" />
-        <el-table-column prop="gender" label="性别" />
-        <el-table-column prop="phone" label="电话" />
-        <el-table-column prop="age" label="年龄" />
+      <el-table :data="tableData" :header-cell-style="{background:'#eef1f6',color:'#606266'}" border style="width: 100%">
+        <el-table-column prop="personnelNumber" label="人员编号" align="center" width="90" />
+        <el-table-column prop="name" label="姓名" width="150" />
+        <el-table-column prop="gender" label="性别" align="center" width="90" />
+        <el-table-column prop="phone" label="电话" width="160" />
+        <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
-        <el-table-column prop="addTime" label="添加时间" />
-        <el-table-column prop="attribute" label="属性" />
+        <el-table-column prop="addTime" label="添加时间" width="120" />
+        <el-table-column prop="attribute" label="属性" width="120"/>
       </el-table>
       <div class="qj-table__footer clear-fix">
         <el-pagination background layout="prev, pager, next" :total="1000" />
@@ -104,11 +105,15 @@ export default defineComponent({
     const onSearch = () => {
       console.log("搜索")
     }
+    const onAdd = () => {
+      console.log("新增")
+    }
 
     return {
       tableData,
       formInline,
-      onSearch
+      onSearch,
+      onAdd
     };
   },
 });
@@ -145,5 +150,9 @@ export default defineComponent({
     float: right;
     margin-top: 16px;
   }
+}
+
+.el-form-item--default {
+  margin-bottom: 0px;
 }
 </style>

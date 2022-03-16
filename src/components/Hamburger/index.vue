@@ -1,6 +1,6 @@
 <template>
   <div :class="[{ 'is-active': isActive }]" @click="toggleClick">
-    <el-icon><aim /></el-icon>
+    <el-icon :size="iconSize"><fold /></el-icon>
   </div>
 </template>
 <script lang="ts">
@@ -12,16 +12,22 @@ import {
   ref,
   onUnmounted,
 } from "vue";
+import {
+  Fold
+} from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "Hamburger",
+  components: {Fold},
   setup(props, ctx) {
     let isActive = false;
+    const iconSize = 20;
     const toggleClick = () => {
       console.log("点击事件");
     };
     return {
       isActive,
+      iconSize,
       toggleClick,
     };
   },
@@ -29,7 +35,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.svg-icon {
+.el-icon {
   vertical-align: middle;
 }
 .is-active {

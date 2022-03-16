@@ -1,5 +1,6 @@
 <template>
   <div :class="{ 'has-logo': showLogo }">
+    <sidebar-logo v-if="showLogo"></sidebar-logo>
     <el-menu
       active-text-color="#ffd04b"
       background-color="#545c64"
@@ -33,9 +34,17 @@ import {
   onUnmounted,
 } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import SidebarLogo from "./SidebarLogo.vue";
+import {
+  Location,
+  Document,
+  Menu as IconMenu,
+  Setting,
+} from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "SideBar",
+  components: {Setting, Document, Location, IconMenu, SidebarLogo},
   setup(props, ctx) {
     let showLogo = true;
     const route = useRoute();
@@ -51,7 +60,7 @@ export default defineComponent({
     return {
       showLogo,
       defaultActive,
-      selectMenuItem,
+      selectMenuItem
     };
   },
 });
