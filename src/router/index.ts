@@ -12,15 +12,20 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     children: [{
       path: '/personnelManagement',
-      name: '人员管理',
-      component: () => import(/* webpackChunkName: "personnelManagement" */ '@/views/personnel-management/index.vue')
+      name: 'personnelManagement', //人员管理
+      component: () =>
+        import(/* webpackChunkName: "personnelManagement" */ '@/views/personnel-management/index.vue')
+    }, {
+      path: '/personnelEquipment',
+      name: 'personnelEquipment', //人员设备
+      component: () =>
+        import(/* webpackChunkName: "personnelEquipment" */ '@/views/personnel-equipment/index.vue'),
+    }, {
+      path: '/personnelMonitoring',
+      name: 'personnelMonitoring', //人员监测
+      component: () =>
+        import(/* webpackChunkName: "personnelMonitoring" */ '@/views/personnel-monitoring/index.vue'),
     }]
-  },
-  {
-    path: '/about',
-    name: 'About', // route level code-splitting // this generates a separate chunk (about.[hash].js) for this route // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "About" */ '../components/About.vue'),
   },
   {
     path: '/:currentPath(.*)*', // 路由未匹配到，进入这个
