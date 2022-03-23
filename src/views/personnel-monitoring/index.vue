@@ -2,7 +2,7 @@
   <div class="">人员监测</div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   defineComponent,
   ComputedRef,
