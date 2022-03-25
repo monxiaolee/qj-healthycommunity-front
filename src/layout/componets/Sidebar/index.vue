@@ -5,7 +5,7 @@
       active-text-color="#ffd04b"
       background-color="#545c64"
       class="el-menu-vertical-demo"
-      default-active="defaultActive"
+      :default-active="defaultActive"
       text-color="#fff"
       @select="selectMenuItem"
     >
