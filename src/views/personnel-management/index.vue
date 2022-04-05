@@ -42,6 +42,7 @@ import {
   onUnmounted,
   reactive
 } from "vue";
+import {getUsers} from '../../api/personnel-management';
 
 export default defineComponent({
   name: "personnelManagement",
@@ -149,8 +150,8 @@ export default defineComponent({
       },
     ];
     const formInline = reactive({
-      user: '',
-      region: '',
+      name: '',
+      phone: '',
     })
     const onSearch = () => {
       console.log("搜索")
@@ -158,6 +159,18 @@ export default defineComponent({
     const onAdd = () => {
       console.log("新增")
     }
+
+    const featchData = () => {
+      // console.log("执行了数据请求函数")
+      getUsers().then((data, error_code) => {
+        console.log(data, error_code)
+
+      })
+    }
+
+    onMounted(() => {
+      featchData();
+    })
 
     return {
       tableData,
