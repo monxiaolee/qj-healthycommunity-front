@@ -28,4 +28,13 @@ export default defineConfig({
       ],
     })
   ],
+  // 设置反向代理，跨域
+  proxy: {
+    '/devApi': {
+      // 后台地址
+      target: 'http://82.157.6.212:8990/',
+      changeOrigin: true,
+      rewrite: path => path.replace(/^/devApi /, '')
+    }
+  }
 })

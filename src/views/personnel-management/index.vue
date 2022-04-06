@@ -15,20 +15,29 @@
       </el-form>
     </div>
     <div class="qj-layout__card">
-      <el-table :data="tableData" :header-cell-style="{background:'#eef1f6',color:'#606266'}" border style="width: 100%">
-        <el-table-column prop="personnelNumber" label="人员编号" align="center" width="90" />
+      <el-table
+        :data="tableData"
+        :header-cell-style="{ background: '#eef1f6', color: '#606266' }"
+        border
+        style="width: 100%"
+      >
+        <el-table-column
+          prop="personnelNumber"
+          label="人员编号"
+          align="center"
+          width="90"
+        />
         <el-table-column prop="name" label="姓名" width="150" />
         <el-table-column prop="gender" label="性别" align="center" width="90" />
         <el-table-column prop="phone" label="电话" width="160" />
         <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
         <el-table-column prop="addTime" label="添加时间" width="120" />
-        <el-table-column prop="attribute" label="操作" width="120"/>
+        <el-table-column prop="attribute" label="操作" width="120" />
       </el-table>
       <div class="qj-table__footer clear-fix">
         <el-pagination background layout="prev, pager, next" :total="1000" />
       </div>
-      
     </div>
   </div>
 </template>
@@ -40,9 +49,9 @@ import {
   computed,
   ref,
   onUnmounted,
-  reactive
+  reactive,
 } from "vue";
-import {getUsers} from '../../api/personnel-management';
+import { getUsers } from "../../api/personnel-management";
 
 export default defineComponent({
   name: "personnelManagement",
@@ -150,33 +159,32 @@ export default defineComponent({
       },
     ];
     const formInline = reactive({
-      name: '',
-      phone: '',
-    })
+      name: "",
+      phone: "",
+    });
     const onSearch = () => {
-      console.log("搜索")
-    }
+      console.log("搜索");
+    };
     const onAdd = () => {
-      console.log("新增")
-    }
+      console.log("新增");
+    };
 
     const featchData = () => {
       // console.log("执行了数据请求函数")
       getUsers().then((data, error_code) => {
-        console.log(data, error_code)
-
-      })
-    }
+        console.log(data, error_code);
+      });
+    };
 
     onMounted(() => {
       featchData();
-    })
+    });
 
     return {
       tableData,
       formInline,
       onSearch,
-      onAdd
+      onAdd,
     };
   },
 });
@@ -197,15 +205,15 @@ export default defineComponent({
   background-color: #fff;
   padding: 24px;
   border-radius: 3px;
-  &+.qj-layout__card {
+  & + .qj-layout__card {
     margin-top: 10px;
   }
 }
 .clear-fix:after {
-  content: "020"; 
-  display: block; 
-  height: 0; 
-  clear: both; 
+  content: "020";
+  display: block;
+  height: 0;
+  clear: both;
   visibility: hidden;
 }
 .qj-table__footer {
