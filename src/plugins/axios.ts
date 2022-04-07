@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 // import qs from "qs";
 
 const request = axios.create({
-    baseURL: '',
+    baseURL: '/fz',
     timeout: 10000
     // transformRequest: [function(data){
     //     const d = qs.stringfy(data)
@@ -14,7 +14,7 @@ const request = axios.create({
 // Request interceptors 请求拦截器 做登录状态的拦截
 // request.interceptors.request.use(
 //     (config) => {
-
+        
 //     }
 // )
 

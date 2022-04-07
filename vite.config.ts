@@ -1,4 +1,4 @@
-import path from 'path'
+// import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import styleImport from 'vite-plugin-style-import'
@@ -8,7 +8,7 @@ import ViteComponents, { ElementPlusResolver } from 'vite-plugin-components'
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src")
+      "@": '/src'
     }
   },
   plugins: [
@@ -29,12 +29,15 @@ export default defineConfig({
     })
   ],
   // 设置反向代理，跨域
-  proxy: {
-    '/devApi': {
-      // 后台地址
-      target: 'http://82.157.6.212:8990/',
-      changeOrigin: true,
-      rewrite: path => path.replace(/^/devApi /, '')
+  server: {
+    proxy: {
+      '/fz': {
+        // 后台地址
+        target: 'http://82.157.6.212:8990/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/fz/, ''),
+      }
     }
   }
+  
 })

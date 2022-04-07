@@ -170,10 +170,8 @@ export default defineComponent({
     };
 
     const featchData = () => {
-      // console.log("执行了数据请求函数")
-      getUsers().then((data, error_code) => {
-        console.log(data, error_code);
-      });
+      console.log("执行了数据请求函数")
+      getUsers(formInline)
     };
 
     onMounted(() => {
