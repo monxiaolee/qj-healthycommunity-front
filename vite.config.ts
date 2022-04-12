@@ -33,7 +33,7 @@ export default defineConfig({
     proxy: {
       '/fz': {
         // 后台地址
-        target: 'http://82.157.6.212:8990/',
+        target: 'http://82.157.6.212:8900/fz',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/fz/, ''),
       }

@@ -6,7 +6,7 @@
           <el-input v-model="formInline.name" placeholder="请输入姓名" />
         </el-form-item>
         <el-form-item label="电话号码：">
-          <el-input v-model="formInline.phone" placeholder="请输入电话号码" />
+          <el-input v-model="formInline.telephone" placeholder="请输入电话号码" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSearch">搜索</el-button>
@@ -22,18 +22,18 @@
         style="width: 100%"
       >
         <el-table-column
-          prop="personnelNumber"
+          prop="id"
           label="人员编号"
           align="center"
           width="90"
         />
         <el-table-column prop="name" label="姓名" width="150" />
-        <el-table-column prop="gender" label="性别" align="center" width="90" />
-        <el-table-column prop="phone" label="电话" width="160" />
+        <el-table-column prop="sex" label="性别" align="center" width="90" />
+        <el-table-column prop="telephone" label="电话" width="160" />
         <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
-        <el-table-column prop="addTime" label="添加时间" width="120" />
-        <el-table-column prop="attribute" label="操作" width="120" />
+        <el-table-column prop="createTime" label="添加时间" width="120" />
+        <el-table-column label="操作" width="120" />
       </el-table>
       <div class="qj-table__footer clear-fix">
         <el-pagination background layout="prev, pager, next" :total="1000" />
@@ -56,122 +56,23 @@ import { getUsers } from "../../api/personnel-management";
 export default defineComponent({
   name: "personnelManagement",
   setup(props, ctx) {
-    const tableData = [
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-      {
-        personnelNumber: "001",
-        name: "Tom",
-        gender: "",
-        phone: "",
-        age: "",
-        address: "",
-        addTime: "",
-        attribute: "",
-      },
-    ];
+    let tableData = reactive([]);
     const formInline = reactive({
       name: "",
-      phone: "",
+      telephone: "",
     });
     const onSearch = () => {
-      console.log("搜索");
+      // 搜索
     };
     const onAdd = () => {
-      console.log("新增");
+      // 新增
     };
 
     const featchData = () => {
-      console.log("执行了数据请求函数")
-      getUsers(formInline)
+      getUsers(formInline).then((res) => {
+        tableData = res.data
+        console.log("---", tableData)
+      })
     };
 
     onMounted(() => {
