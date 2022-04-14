@@ -33,7 +33,19 @@
         <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
         <el-table-column prop="createTime" label="添加时间" width="120" />
-        <el-table-column label="操作" width="120" />
+        <el-table-column label="操作" width="120">
+          <template #default="scope">
+            <el-button size="small" @click="handleDetail(scope.$index, scope.row)"
+              >详情</el-button
+            >
+            <!-- <el-button
+              size="small"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)"
+              >Delete</el-button
+            > -->
+          </template>
+        </el-table-column>
       </el-table>
       <div class="qj-table__footer clear-fix">
         <el-pagination background layout="prev, pager, next" :total="1000" />
@@ -56,7 +68,10 @@ import { getUsers } from "../../api/personnel-management";
 export default defineComponent({
   name: "personnelManagement",
   setup(props, ctx) {
-    let tableData = reactive([]);
+    let tableData = ref([]);
+    interface User {
+      id: string
+    }
     const formInline = reactive({
       name: "",
       telephone: "",
@@ -68,10 +83,15 @@ export default defineComponent({
       // 新增
     };
 
+
+
+    const handleDetail = (index: number, row: User) => {
+      console.log("查看人员详情")
+    }
+
     const featchData = () => {
       getUsers(formInline).then((res) => {
-        tableData = res.data
-        console.log("---", tableData)
+        tableData.value = [].concat(res.data)
       })
     };
 
