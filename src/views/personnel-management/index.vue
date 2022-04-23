@@ -51,6 +51,8 @@
         <el-pagination background layout="prev, pager, next" :total="1000" />
       </div>
     </div>
+
+
   </div>
 </template>
 <script lang="ts">
@@ -85,7 +87,7 @@ export default defineComponent({
 
 
 
-    const handleDetail = (index: number, row: User) => {
+    const handleDetail = (index: number, row: any) => {
       console.log("查看人员详情")
     }
 
@@ -104,6 +106,7 @@ export default defineComponent({
       formInline,
       onSearch,
       onAdd,
+      handleDetail
     };
   },
 });

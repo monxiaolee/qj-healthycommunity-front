@@ -28,6 +28,16 @@ const routes: Array<RouteRecordRaw> = [
     }]
   },
   {
+    path: '/personnelManagement/detail',
+    name: 'Detail',
+    component: () => import(/* webpackChunkName: "Detail" */ '@/views/personnel-management/detail.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "Login" */ '@/views/login/index.vue')
+  },
+  {
     path: '/:currentPath(.*)*', // 路由未匹配到，进入这个
     redirect: (_) => {
       return { path: '/404' }
