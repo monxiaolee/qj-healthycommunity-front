@@ -8,5 +8,5 @@ import '@/styles/index.less'
 import plugins from './plugins'
 
 createApp(App)
-.use(plugins)
-.mount('#app')
+    .use(plugins)
+    .mount('#app')
