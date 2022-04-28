@@ -55,11 +55,10 @@ import {
 export default defineComponent({
   name: "personnelMonitoring",
   setup(props, ctx) {
-    let socket: any = null
+    // let socket: any = null
+    const socket = io('http://82.157.6.212:8090')
     onMounted(() => {
-      socket = io('http://82.157.6.212:8090', {
-        transports: ['websocket']
-      })
+      // socket = io('http://82.157.6.212:8090')
       socket.on('connect', () => {
         console.log("connect: websocket 连接成功")
       })
