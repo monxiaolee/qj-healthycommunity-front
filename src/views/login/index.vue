@@ -8,26 +8,24 @@
             <el-form-item>
               <section class="au-flex login-item">
                 <label class="au-flex au-flex-row-center au-flex-column-center" for="username">
-                  <i class="el-icon-user"></i>
+                  <el-icon><UserFilled /></el-icon>
                   <small>账号</small>
                 </label>
-                <input type="text" v-model="username" placeholder="请输入账号" id="username" autocomplete="off" />
+                <input type="text" v-model="form.username" placeholder="请输入账号" id="username" autocomplete="off" />
               </section>
             </el-form-item>
             <el-form-item>
               <section class="au-flex login-item">
                 <label class="au-flex au-flex-row-center au-flex-column-center" for="password">
-                  <i class="el-icon-lock"></i>
+                  <el-icon><Unlock /></el-icon>
                   <small>密码</small>
                 </label>
-                <input type="password" v-model="password" placeholder="请输入密码" id="password" autocomplete="off" />
+                <input type="password" v-model="form.password" placeholder="请输入密码" id="password" autocomplete="off" />
               </section>
             </el-form-item>
             <el-form-item class="login-btns">
               <el-button type="primary" @click="onLogin">登 录</el-button>
-              <el-button>注 册</el-button>
             </el-form-item>
-            <p class="tips">账号：admin ,密码：admin</p>
           </el-form>
         </section>
       </el-col>
@@ -36,34 +34,31 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs, inject } from 'vue'
-import { ElNotification } from 'element-plus'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from "vue-router";
+import {
+  UserFilled,
+  Unlock
+} from '@element-plus/icons-vue'
 export default defineComponent({
   name: 'login',
+  components: {Unlock, UserFilled},
   setup(prop, ctx) {
-    const { store } = inject('Store')
-    const router = useRouter()
+    const router = useRouter();
     const form = reactive({
       username: 'admin',
-      password: 'admin',
+      password: 'admin'
     })
-    const onLogin = async() => {
-      store.dispatch('login', form).then((message: any) => {
-        ElNotification({
-          type: 'success',
-          message: message
-        })
-        router.push({ name: 'Home' })
-      }).catch((error: any) => {
-        ElNotification({
-          type: 'error',
-          message: error
-        })
+
+    const onLogin = () => {
+      // console.log("登录逻辑")
+      router.push({
+        name: 'personnelManagement'
       })
     }
+    
     return {
-      ...toRefs(form),
       onLogin,
+      form,
     }
   },
 })
@@ -73,27 +68,31 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: #2d3a4b;
   &-wrapper {
     width: 80%;
     max-width: 400px;
     position: absolute;
     padding: 32px;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     .title {
-      font-size: 20px;
+      color: #eee;
+      font-size: 26px;
       line-height: 32px;
       margin-bottom: 32px;
     }
     .login-item {
+      width: 100%;
       padding: 4px 11px;
       border: 1px solid #409EFF;
-      border-radius: 26px;
+      border-radius: 5px;
       transition: all .2s;
       &:focus-within {
-        border: 1px solid transparent;
-        box-shadow: 0 0px 15px 0px #409eff, 0 0px 12px 0 rgb(0 0 0 / 20%) inset;
+        border: 1px solid #409eff;
+        // border: 1px solid transparent;
+        // box-shadow: 0 0px 15px 0px #409eff, 0 0px 12px 0 rgb(0 0 0 / 20%) inset;
       }
       label {
         cursor: pointer;
@@ -101,6 +100,7 @@ export default defineComponent({
         color: rgb(64, 158, 255);
         i {
           font-size: 20px;
+          vertical-align: middle;
         }
         small {
           color: #999;
@@ -111,9 +111,10 @@ export default defineComponent({
         }
       }
       input {
+        width: calc(~'100% - 80px');
         flex: 1;
         border: none;
-        font-size: 15px;
+        font-size: 16px;
         color: #409EFF;
         font-weight: 600;
         letter-spacing: .1em;
@@ -132,11 +133,14 @@ export default defineComponent({
     }
     .login-btns {
       :deep(.el-form-item__content) {
-        display: flex;   
+        display: flex;
         flex-direction: column;
         .el-button {
+          height: 40px;
+          font-size: 16px;
           margin-left: 0px;
           margin-top: 16px;
+          width: 100%;
         }
       }
     }

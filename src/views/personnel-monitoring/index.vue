@@ -40,7 +40,6 @@
 </template>
 
 <script lang="ts">
-import { io } from "socket.io-client";
 import {
   defineComponent,
   ComputedRef,
@@ -56,25 +55,47 @@ export default defineComponent({
   name: "personnelMonitoring",
   setup(props, ctx) {
     // let socket: any = null
-    const socket = io('http://82.157.6.212:8090')
+    // const socket = io('ws://82.157.6.212:8100')
+    const wsuri = 'ws://82.157.6.212:8100'
+    let websocket: any = null
+
+    const initWebSocket = () => {
+      websocket = new WebSocket(wsuri)
+      websocket.onopen = webSocketOpen
+      websocket.onmessage = webSocketMessage
+    }
+
+    // 连接建立触法
+    const webSocketOpen = () => {
+      console.log("连接成功")
+      websocketSend({})
+    }
+
+    // 发送给后端的消息
+    const websocketSend = (e:any) => {
+      websocket.send(e)
+    }
+
+    // 监听发送的消息
+    const webSocketMessage = (msg: any) => {
+      console.log("坚挺到的消息", msg)
+    }
+
+    // websocket 断开连接
+    const webSocketClose = () => {
+      console.log("断开连接")
+    }
+
     onMounted(() => {
-      // socket = io('http://82.157.6.212:8090')
-      socket.on('connect', () => {
-        console.log("connect: websocket 连接成功")
-      })
-      // socket.on('message', (msg:any) => {
-      //   console.log(msg)
-      // })
-      // socket.on('disconnect', () => {
-      //   console.log('disconnect: websocket 连接关闭')
-      // })
+      // initWebSocket()
     }),
     onBeforeUnmount(() => {
-      // 关闭连接
-      // console.log("关闭连接")
-      // socket.close()
-      // socket = null
+      websocket.onclose = webSocketClose
     });
+
+    return {
+      
+    }
   },
 });
 </script>
@@ -106,6 +127,7 @@ export default defineComponent({
   border: 1px solid #e6ebf5;
   border-radius: 4px;
   cursor: pointer;
+
   &:hover {
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
   }
@@ -119,11 +141,14 @@ export default defineComponent({
 
   .content {
     padding: 20px;
+
     span {
       display: block;
+
       &.name {
         font-size: 18px;
       }
+
       &.value {
         font-size: 34px;
       }

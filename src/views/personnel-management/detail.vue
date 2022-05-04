@@ -47,6 +47,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref, reactive } from "vue"
+import { useRoute, useRouter } from "vue-router";
 import { getUserBasicInfo } from '../../api/personnel-management'
 import { getUserInfo } from '../../api/personnel-management'
 
@@ -60,8 +61,13 @@ export default defineComponent({
     },
     setup(props, ctx) {
         const time = ref('')
+        const router = useRouter()
+        const id = router.currentRoute.value.params.id
+
+
+        console.log("获取路由ID", id)
         let userId: Object = {
-            userId: 1
+            userId: id
         }
         const startTime = (time: any) => {
             const nowTimeDate = new Date(time)
@@ -77,7 +83,7 @@ export default defineComponent({
             getUserInfo({
                 startTime: startTime(val),
                 dateTime: endTime(val),
-                userId: 1
+                userId: id
             }).then((res) => {
                 console.log("人员历史数据", res)
             })
@@ -87,9 +93,9 @@ export default defineComponent({
                 console.log("人员数据返回", res)
             })
             getUserInfo({
-                startTime: "",
-                dateTime: "",
-                userId: 1
+                startTime: new Date(new Date().toLocaleDateString()).getTime(),
+                dateTime: new Date().getTime(),
+                userId: id
             }).then((res) => {
                 console.log("人员历史数据", res)
             })

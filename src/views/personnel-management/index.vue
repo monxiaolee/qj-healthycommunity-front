@@ -10,7 +10,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSearch">搜索</el-button>
-          <el-button type="success" @click="onAdd">新增</el-button>
+          <!-- <el-button type="success" @click="onAdd">新增</el-button> -->
         </el-form-item>
       </el-form>
     </div>
@@ -66,10 +66,12 @@ import {
   reactive,
 } from "vue";
 import { getUsers } from "../../api/personnel-management";
+import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   name: "personnelManagement",
   setup(props, ctx) {
+    const router = useRouter();
     let tableData = ref([]);
     interface User {
       id: string
@@ -88,7 +90,10 @@ export default defineComponent({
 
 
     const handleDetail = (index: number, row: any) => {
-      console.log("查看人员详情")
+      // console.log("查看人员详情", row.id)
+      router.push({
+        path: `/personnelManagement/detail/${row.id}`
+      })
     }
 
     const featchData = () => {

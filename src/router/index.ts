@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     }]
   },
   {
-    path: '/personnelManagement/detail',
+    path: '/personnelManagement/detail/:id',
     name: 'Detail',
     component: () => import(/* webpackChunkName: "Detail" */ '@/views/personnel-management/detail.vue')
   },

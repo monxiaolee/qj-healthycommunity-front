@@ -4,6 +4,7 @@
     <el-menu
       active-text-color="#ffd04b"
       background-color="#545c64"
+      :collapse="isCollapse"
       class="el-menu-vertical-demo"
       :default-active="defaultActive"
       text-color="#fff"
@@ -49,6 +50,7 @@ export default defineComponent({
     let showLogo = true;
     const route = useRoute();
     const router = useRouter();
+    const isCollapse = ref(true)
 
     const defaultActive = computed(() => route.name);
     const selectMenuItem = (type: any) => {
@@ -58,6 +60,7 @@ export default defineComponent({
     };
     onMounted(() => {});
     return {
+      isCollapse,
       showLogo,
       defaultActive,
       selectMenuItem

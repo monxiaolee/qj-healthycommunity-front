@@ -22,6 +22,14 @@ export default defineComponent({
     },
     setup(props, ctx) {
         let fixedHeader = true;
+
+        const classObj = computed(() => {
+            return {
+                // hideSidebar: !this.sidebar.opened,
+                // openSidebar: this.sidebar.opened,
+            }
+        })
+        
         return {
             fixedHeader
         }
@@ -37,6 +45,11 @@ export default defineComponent({
     content: "";
     display: table;
     clear: both;
+}
+.hideSidebar {
+    .main-container {
+        margin-left: 54px;
+    }
 }
 .sidebar-container {
   transition: width 0.28s;
