@@ -69,20 +69,22 @@ export default defineComponent({
         let userId: Object = {
             userId: id
         }
-        const startTime = (time: any) => {
-            const nowTimeDate = new Date(time)
-            return nowTimeDate.setHours(0, 0, 0, 0)
+        const getTime = (time:any) => {
+            const nowTimeDate = new Date(time).getTime();
+            return nowTimeDate
         }
-        const endTime = (time: any) => {
-            const nowTimeDate = new Date(time)
-            return nowTimeDate.setHours(23, 59, 59, 999)
-        }
+        // const startTime = (time: any) => {
+        //     const nowTimeDate = new Date(time);
+        //     return nowTimeDate.setHours(0, 0, 0, 0)
+        // }
+        // const endTime = (time: any) => {
+        //     const nowTimeDate = new Date(time)
+        //     return nowTimeDate.setHours(23, 59, 59, 999)
+        // }
         const timeChange = (val: any) => {
             // userListParams.startTime = startTime(val)
-            console.log("===", startTime(val))
             getUserInfo({
-                startTime: startTime(val),
-                dateTime: endTime(val),
+                time: getTime(val),
                 userId: id
             }).then((res) => {
                 console.log("人员历史数据", res)
@@ -93,8 +95,7 @@ export default defineComponent({
                 console.log("人员数据返回", res)
             })
             getUserInfo({
-                startTime: new Date(new Date().toLocaleDateString()).getTime(),
-                dateTime: new Date().getTime(),
+                time: new Date().valueOf(),
                 userId: id
             }).then((res) => {
                 console.log("人员历史数据", res)

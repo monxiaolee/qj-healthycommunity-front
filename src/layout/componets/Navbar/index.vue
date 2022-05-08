@@ -7,7 +7,7 @@
         trigger="click"
       >
         <div class="el-dropdown-link">
-          张三
+          超级管理员
           <el-icon class="el-icon--right">
             <arrow-down />
           </el-icon>

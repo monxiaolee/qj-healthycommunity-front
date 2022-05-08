@@ -35,7 +35,7 @@
         <el-table-column prop="phoneNum" label="手机号" width="200" />
       </el-table>
       <div class="qj-table__footer clear-fix">
-        <el-pagination background layout="prev, pager, next" :total="1000" />
+        <el-pagination background layout="prev, pager, next" :total="total" />
       </div>
     </div>
 
@@ -58,13 +58,16 @@ export default defineComponent({
   name: "personnelEquipment",
   setup(props, ctx) {
     let tableData = ref([]);
+    let total = 0
     interface User {
       id: string
     }
     const formInline = reactive({
       name: "",
       telephone: "",
-      equipmentId: ""
+      equipmentId: "",
+      page: 1,
+      size: 10
     });
     const onSearch = () => {
       // 搜索
@@ -73,7 +76,8 @@ export default defineComponent({
 
     const featchData = () => {
       getPersonEquipment(formInline).then((res) => {
-        tableData.value = [].concat(res.data)
+        tableData.value = [].concat(res.data.list)
+        total = res.data.total
       })
     };
 
@@ -82,6 +86,7 @@ export default defineComponent({
     });
 
     return {
+      total,
       tableData,
       formInline,
       onSearch

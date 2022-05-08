@@ -48,7 +48,7 @@
         </el-table-column>
       </el-table>
       <div class="qj-table__footer clear-fix">
-        <el-pagination background layout="prev, pager, next" :total="1000" />
+        <el-pagination background layout="prev, pager, next" :total="total" />
       </div>
     </div>
 
@@ -73,12 +73,15 @@ export default defineComponent({
   setup(props, ctx) {
     const router = useRouter();
     let tableData = ref([]);
+    let total = 0;
     interface User {
       id: string
     }
     const formInline = reactive({
       name: "",
       telephone: "",
+      page: 1,
+      size: 10
     });
     const onSearch = () => {
       // 搜索
@@ -98,7 +101,8 @@ export default defineComponent({
 
     const featchData = () => {
       getUsers(formInline).then((res) => {
-        tableData.value = [].concat(res.data)
+        tableData.value = [].concat(res.data.list)
+        total = res.data.total
       })
     };
 
@@ -108,6 +112,7 @@ export default defineComponent({
 
     return {
       tableData,
+      total,
       formInline,
       onSearch,
       onAdd,

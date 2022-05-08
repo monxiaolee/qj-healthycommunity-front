@@ -50,7 +50,7 @@ export default defineComponent({
     let showLogo = true;
     const route = useRoute();
     const router = useRouter();
-    const isCollapse = ref(true)
+    const isCollapse = ref(false)
 
     const defaultActive = computed(() => route.name);
     const selectMenuItem = (type: any) => {
