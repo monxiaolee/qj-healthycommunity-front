@@ -85,6 +85,7 @@ export default defineComponent({
     });
     const onSearch = () => {
       // 搜索
+      featchData()
     };
     const onAdd = () => {
       // 新增
@@ -94,9 +95,13 @@ export default defineComponent({
 
     const handleDetail = (index: number, row: any) => {
       // console.log("查看人员详情", row.id)
-      router.push({
+      // router.push({
+      //   path: `/personnelManagement/detail/${row.id}`
+      // })
+      const routeUrl = router.resolve({
         path: `/personnelManagement/detail/${row.id}`
       })
+      window.open(routeUrl.href, '_blank')
     }
 
     const featchData = () => {

@@ -4,14 +4,30 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, reactive } from "vue"
+import { defineComponent, onMounted, ref, reactive, watch } from "vue"
 import * as Echarts from 'echarts'
 
 export default defineComponent({
     name: "line",
+    props: {
+        chartTime: {
+            type: Array,
+            default: () => []
+        },
+        chartValue: {
+            type: Array,
+            default: () => []
+        }
+    },
     setup(props, ctx) {
-        const dateList: any = ["2022-06-06", "2022-06-07", "2022-06-08", "2022-06-09", "2022-06-10"]
-        const valueList: any = [100, 110, 120, 130, 140]
+        // const dateList: any = ["2022-06-06", "2022-06-07", "2022-06-08", "2022-06-09", "2022-06-10"]
+        // const valueList: any = [100, 110, 120, 130, 140]
+        const dateList = props.chartTime
+        const valueList = props.chartValue
+
+        console.log("dateList", dateList)
+        console.log("valueList", valueList)
+        
         const option = {
             visualMap: [
                 {
@@ -57,6 +73,9 @@ export default defineComponent({
 
         }
         onMounted(() => {
+            initChart()
+        })
+        watch(props.chartTime, () => {
             initChart()
         })
         return {

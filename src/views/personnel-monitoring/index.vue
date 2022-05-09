@@ -1,18 +1,18 @@
 <template>
   <div class="person-monitor__wrapper">
     <ul class="person-monitor">
-      <li>
+      <li v-for="(item, index) in personList" :key="index">
         <div class="monitor-card">
-          <div class="title">张三丰</div>
+          <div class="title">{{ item.name }}</div>
           <div class="content">
             <el-row>
               <el-col :span="12">
                 <span class="name">心率</span>
-                <span class="value">100</span>
+                <span class="value">{{ item.heart }}</span>
               </el-col>
               <el-col :span="12">
                 <span class="name">温度</span>
-                <span class="value">0.253</span>
+                <span class="value">{{ item.temperature }}</span>
               </el-col>
             </el-row>
           </div>
@@ -39,46 +39,62 @@ export default defineComponent({
   setup(props, ctx) {
     // let socket: any = null
     // const socket = io('ws://82.157.6.212:8100')
-    const wsuri = 'ws://82.157.6.212:8100'
-    let websocket: any = null
+    const wsuri = "ws://82.157.6.212:8100";
+    let websocket: any = null;
+    let personList: Array<any> = reactive([]);
 
     const initWebSocket = () => {
-      websocket = new WebSocket(wsuri)
-      websocket.onopen = webSocketOpen
-      websocket.onmessage = webSocketMessage
-    }
+      websocket = new WebSocket(wsuri);
+      websocket.onopen = webSocketOpen;
+      websocket.onmessage = webSocketMessage;
+    };
 
     // 连接建立触法
     const webSocketOpen = () => {
-      console.log("连接成功")
-      websocketSend({})
-    }
+      console.log("连接成功");
+      websocketSend({});
+    };
 
     // 发送给后端的消息
-    const websocketSend = (e:any) => {
-      websocket.send(e)
-    }
+    const websocketSend = (e: any) => {
+      websocket.send(e);
+    };
 
     // 监听发送的消息
     const webSocketMessage = (msg: any) => {
-      console.log("监听到的消息", msg.data)
-    }
+      personList.length = 0;
+      console.log(msg);
+      let msgData: Object = {};
+      try {
+        msgData = JSON.parse(msg.data);
+      } catch (e) {
+        console.log(e);
+      }
 
-    // websocket 断开连接
-    const webSocketClose = () => {
-      console.log("断开连接")
-    }
+      if (msgData) {
+        Object.keys(msgData).forEach((item) => {
+          Object.keys(msgData[item]).forEach((subItem) => {
+            personList.push({
+              name: msgData[item][subItem].name,
+              heart: msgData[item][subItem].heart,
+              temperature: msgData[item][subItem].temperature,
+            });
+          });
+        });
+      }
+    };
 
     onMounted(() => {
-      initWebSocket()
+      initWebSocket();
     }),
-    onBeforeUnmount(() => {
-      websocket.onclose = webSocketClose
-    });
+      onBeforeUnmount(() => {
+        console.log("websocket 断开连接")
+        websocket.close();
+      });
 
     return {
-      
-    }
+      personList,
+    };
   },
 });
 </script>
@@ -101,6 +117,7 @@ export default defineComponent({
       width: 300px;
       float: left;
       margin-right: 16px;
+      margin-bottom: 16px;
     }
   }
 }

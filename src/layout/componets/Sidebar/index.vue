@@ -11,15 +11,15 @@
       @select="selectMenuItem"
     >
       <el-menu-item index="personnelManagement">
-        <el-icon><icon-menu /></el-icon>
+        <el-icon><user /></el-icon>
         <span>人员管理</span>
       </el-menu-item>
       <el-menu-item index="personnelEquipment">
-        <el-icon><setting /></el-icon>
+        <el-icon><Aim /></el-icon>
         <span>人员设备</span>
       </el-menu-item>
       <el-menu-item index="personnelMonitoring">
-        <el-icon><setting /></el-icon>
+        <el-icon><DataAnalysis /></el-icon>
         <span>人员监测</span>
       </el-menu-item>
     </el-menu>
@@ -39,13 +39,16 @@ import SidebarLogo from "./SidebarLogo.vue";
 import {
   Location,
   Document,
+  User,
+  Aim,
+  DataAnalysis,
   Menu as IconMenu,
   Setting,
 } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "SideBar",
-  components: {Setting, Document, Location, IconMenu, SidebarLogo},
+  components: {Setting, Document, Location, IconMenu, SidebarLogo, User, Aim, DataAnalysis},
   setup(props, ctx) {
     let showLogo = true;
     const route = useRoute();
