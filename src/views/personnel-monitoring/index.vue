@@ -3,33 +3,16 @@
     <ul class="person-monitor">
       <li>
         <div class="monitor-card">
-          <div class="title">李梦晓</div>
+          <div class="title">张三丰</div>
           <div class="content">
             <el-row>
               <el-col :span="12">
                 <span class="name">心率</span>
-                <span class="value">120</span>
+                <span class="value">100</span>
               </el-col>
               <el-col :span="12">
                 <span class="name">温度</span>
-                <span class="value">36.5</span>
-              </el-col>
-            </el-row>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="monitor-card">
-          <div class="title">李梦晓</div>
-          <div class="content">
-            <el-row>
-              <el-col :span="12">
-                <span class="name">心率</span>
-                <span class="value">120</span>
-              </el-col>
-              <el-col :span="12">
-                <span class="name">温度</span>
-                <span class="value">36.5</span>
+                <span class="value">0.253</span>
               </el-col>
             </el-row>
           </div>
@@ -78,7 +61,7 @@ export default defineComponent({
 
     // 监听发送的消息
     const webSocketMessage = (msg: any) => {
-      console.log("坚挺到的消息", msg)
+      console.log("监听到的消息", msg.data)
     }
 
     // websocket 断开连接
@@ -87,7 +70,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      // initWebSocket()
+      initWebSocket()
     }),
     onBeforeUnmount(() => {
       websocket.onclose = webSocketClose
