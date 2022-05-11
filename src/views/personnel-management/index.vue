@@ -6,7 +6,10 @@
           <el-input v-model="formInline.name" placeholder="请输入姓名" />
         </el-form-item>
         <el-form-item label="电话号码：">
-          <el-input v-model="formInline.telephone" placeholder="请输入电话号码" />
+          <el-input
+            v-model="formInline.telephone"
+            placeholder="请输入电话号码"
+          />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSearch">搜索</el-button>
@@ -21,21 +24,20 @@
         border
         style="width: 100%"
       >
-        <el-table-column
-          prop="id"
-          label="人员编号"
-          align="center"
-          width="90"
-        />
+        <el-table-column prop="id" label="人员编号" align="center" width="90" />
         <el-table-column prop="name" label="姓名" width="150" />
         <el-table-column prop="sex" label="性别" align="center" width="90" />
         <el-table-column prop="telephone" label="电话" width="160" />
         <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
-        <el-table-column prop="createTime" label="添加时间" width="120" />
+        <!-- <el-table-column prop="createTime" label="添加时间" width="120" /> -->
+        <el-table-column label="添加时间" prop="createTime" width="180" :formatter="timeFormatter">
+        </el-table-column>
         <el-table-column label="操作" width="120">
           <template #default="scope">
-            <el-button size="small" @click="handleDetail(scope.$index, scope.row)"
+            <el-button
+              size="small"
+              @click="handleDetail(scope.$index, scope.row)"
               >详情</el-button
             >
             <!-- <el-button
@@ -51,8 +53,6 @@
         <el-pagination background layout="prev, pager, next" :total="total" />
       </div>
     </div>
-
-
   </div>
 </template>
 <script lang="ts">
@@ -75,23 +75,21 @@ export default defineComponent({
     let tableData = ref([]);
     let total = 0;
     interface User {
-      id: string
+      id: string;
     }
     const formInline = reactive({
       name: "",
       telephone: "",
       page: 1,
-      size: 10
+      size: 10,
     });
     const onSearch = () => {
       // 搜索
-      featchData()
+      featchData();
     };
     const onAdd = () => {
       // 新增
     };
-
-
 
     const handleDetail = (index: number, row: any) => {
       // console.log("查看人员详情", row.id)
@@ -99,16 +97,36 @@ export default defineComponent({
       //   path: `/personnelManagement/detail/${row.id}`
       // })
       const routeUrl = router.resolve({
-        path: `/personnelManagement/detail/${row.id}`
-      })
-      window.open(routeUrl.href, '_blank')
+        path: `/personnelManagement/detail/${row.id}`,
+      });
+      window.open(routeUrl.href, "_blank");
+    };
+
+    const timeFormatter = (row, column, cellValue, index) => {
+      let format = 'YYYY-mm-dd HH:MM:SS'
+      let date = new Date(cellValue);
+      const dataItem = {
+        'Y+': date.getFullYear().toString(),
+        'm+': (date.getMonth() + 1).toString(),
+        'd+': date.getDate().toString(),
+        'H+': date.getHours().toString(),
+        'M+': date.getMinutes().toString(),
+        'S+': date.getSeconds().toString(),
+      };
+      Object.keys(dataItem).forEach((item) => {
+        const ret = new RegExp(`(${item})`).exec(format);
+        if (ret) {
+          format = format.replace(ret[1], ret[1].length === 1 ? dataItem[item] : dataItem[item].padStart(ret[1].length, '0'));
+        }
+      });
+      return format
     }
 
     const featchData = () => {
       getUsers(formInline).then((res) => {
-        tableData.value = [].concat(res.data.list)
-        total = res.data.total
-      })
+        tableData.value = [].concat(res.data.list);
+        total = res.data.total;
+      });
     };
 
     onMounted(() => {
@@ -121,7 +139,8 @@ export default defineComponent({
       formInline,
       onSearch,
       onAdd,
-      handleDetail
+      handleDetail,
+      timeFormatter
     };
   },
 });

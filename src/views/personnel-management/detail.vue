@@ -117,6 +117,10 @@ export default defineComponent({
         time: getTime(val),
         userId: id,
       }).then((res) => {
+        personTime.value.length = 0
+        personHeart.value.length = 0
+        personTemperature.value.length = 0
+        personHumidity.value.length = 0
         res.data.forEach((element: Object) => {
           personTime.value.push(element.createTime);
           personHeart.value.push(element.heart);
@@ -133,7 +137,16 @@ export default defineComponent({
         time: new Date().getTime(),
         userId: id,
       }).then((res) => {
-        console.log("人员历史数据", res);
+        personTime.value.length = 0
+        personHeart.value.length = 0
+        personTemperature.value.length = 0
+        personHumidity.value.length = 0
+        res.data.forEach((element: Object) => {
+          personTime.value.push(element.createTime);
+          personHeart.value.push(element.heart);
+          personTemperature.value.push(element.temperature);
+          personHumidity.value.push(element.humidity);
+        });
       });
     };
     onMounted(() => {

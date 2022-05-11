@@ -71,15 +71,26 @@ export default defineComponent({
         console.log(e);
       }
 
+      // if (msgData) {
+      //   Object.keys(msgData).forEach((item) => {
+      //     Object.keys(msgData[item]).forEach((subItem) => {
+      //       personList.push({
+      //         name: msgData[item][subItem].name,
+      //         heart: msgData[item][subItem].heart,
+      //         temperature: msgData[item][subItem].temperature,
+      //       });
+      //     });
+      //   });
+      // }
       if (msgData) {
         Object.keys(msgData).forEach((item) => {
-          Object.keys(msgData[item]).forEach((subItem) => {
-            personList.push({
-              name: msgData[item][subItem].name,
-              heart: msgData[item][subItem].heart,
-              temperature: msgData[item][subItem].temperature,
-            });
+
+          personList.push({
+            name: msgData[item].name,
+            heart: msgData[item].heart,
+            temperature: msgData[item].temperature,
           });
+
         });
       }
     };
