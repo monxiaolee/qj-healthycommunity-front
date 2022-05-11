@@ -2,7 +2,7 @@
   <div class="detail-wrapper__full">
     <div class="detail-header">人员详情</div>
     <div class="detail-content">
-      <basic-info></basic-info>
+      <basic-info :userBasicInfo="userData"></basic-info>
 
       <div class="form-box clear-fixed">
         <el-date-picker
@@ -81,6 +81,7 @@ export default defineComponent({
     let personHeart = ref([]);
     let personTemperature = ref([]);
     let personHumidity = ref([]);
+    let userData = {};
     // let personData = {
     //     time: [],
     //     heart: [],
@@ -117,10 +118,10 @@ export default defineComponent({
         time: getTime(val),
         userId: id,
       }).then((res) => {
-        personTime.value.length = 0
-        personHeart.value.length = 0
-        personTemperature.value.length = 0
-        personHumidity.value.length = 0
+        personTime.value.length = 0;
+        personHeart.value.length = 0;
+        personTemperature.value.length = 0;
+        personHumidity.value.length = 0;
         res.data.forEach((element: Object) => {
           personTime.value.push(element.createTime);
           personHeart.value.push(element.heart);
@@ -131,16 +132,17 @@ export default defineComponent({
     };
     const featchData = () => {
       getUserBasicInfo(userId).then((res) => {
-        console.log("人员数据返回", res);
+        userData = res.data;
+        console.log("人员数据返回", userData);
       });
       getUserInfo({
         time: new Date().getTime(),
         userId: id,
       }).then((res) => {
-        personTime.value.length = 0
-        personHeart.value.length = 0
-        personTemperature.value.length = 0
-        personHumidity.value.length = 0
+        personTime.value.length = 0;
+        personHeart.value.length = 0;
+        personTemperature.value.length = 0;
+        personHumidity.value.length = 0;
         res.data.forEach((element: Object) => {
           personTime.value.push(element.createTime);
           personHeart.value.push(element.heart);
@@ -159,6 +161,7 @@ export default defineComponent({
       personHeart,
       personTemperature,
       personHumidity,
+      userData,
       //   ...toRefs(charts),
     };
   },

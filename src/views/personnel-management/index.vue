@@ -24,16 +24,17 @@
         border
         style="width: 100%"
       >
-        <el-table-column prop="id" label="人员编号" align="center" width="90" />
+        <el-table-column type="index" label="序号" align="center" width="60" :index="indexMethod" />
+        <!-- <el-table-column prop="id" label="人员编号" align="center" width="90" /> -->
         <el-table-column prop="name" label="姓名" width="150" />
-        <el-table-column prop="sex" label="性别" align="center" width="90" />
+        <el-table-column prop="sex" label="性别" align="center" width="90" :formatter="sexFormatter" />
         <el-table-column prop="telephone" label="电话" width="160" />
         <el-table-column prop="age" label="年龄" width="90" />
         <el-table-column prop="address" label="家庭住址" />
         <!-- <el-table-column prop="createTime" label="添加时间" width="120" /> -->
         <el-table-column label="添加时间" prop="createTime" width="180" :formatter="timeFormatter">
         </el-table-column>
-        <el-table-column label="操作" width="120">
+        <el-table-column label="操作" align="center" width="120">
           <template #default="scope">
             <el-button
               size="small"
@@ -90,6 +91,9 @@ export default defineComponent({
     const onAdd = () => {
       // 新增
     };
+    const indexMethod = (index: number) => {
+      return index + 1
+    }
 
     const handleDetail = (index: number, row: any) => {
       // console.log("查看人员详情", row.id)
@@ -122,6 +126,10 @@ export default defineComponent({
       return format
     }
 
+    const sexFormatter = (row, column, cellValue, index) => {
+      return cellValue == 1? '男' : '女'
+    }
+
     const featchData = () => {
       getUsers(formInline).then((res) => {
         tableData.value = [].concat(res.data.list);
@@ -137,10 +145,12 @@ export default defineComponent({
       tableData,
       total,
       formInline,
+      indexMethod,
       onSearch,
       onAdd,
       handleDetail,
-      timeFormatter
+      timeFormatter,
+      sexFormatter
     };
   },
 });

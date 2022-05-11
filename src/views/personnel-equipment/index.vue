@@ -23,12 +23,7 @@
         border
         style="width: 100%"
       >
-        <el-table-column
-          prop="id"
-          label="序号"
-          align="center"
-          width="90"
-        />
+        <el-table-column type="index" label="序号" align="center" width="60" :index="indexMethod" />
         <el-table-column prop="deviceType" label="设备类型" width="150" />
         <el-table-column prop="deviceId" label="设备编号" align="center"/>
         <el-table-column prop="name" label="人员姓名" width="160" />
@@ -74,6 +69,10 @@ export default defineComponent({
       featchData()
     };
 
+    const indexMethod = (index: number) => {
+      return index + 1
+    }
+
     const featchData = () => {
       getPersonEquipment(formInline).then((res) => {
         tableData.value = [].concat(res.data.list)
@@ -89,6 +88,7 @@ export default defineComponent({
       total,
       tableData,
       formInline,
+      indexMethod,
       onSearch
     };
   },
