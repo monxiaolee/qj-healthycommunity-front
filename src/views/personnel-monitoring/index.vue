@@ -2,17 +2,21 @@
   <div class="person-monitor__wrapper">
     <ul class="person-monitor">
       <li v-for="(item, index) in personList" :key="index">
-        <div class="monitor-card">
+        <div :class="['monitor-card', item.heart > 120 ? 'alarm': '']">
           <div class="title">{{ item.name }}</div>
           <div class="content">
             <el-row>
-              <el-col :span="12">
+              <el-col :span="8">
                 <span class="name">心率</span>
                 <span class="value">{{ item.heart }}</span>
               </el-col>
-              <el-col :span="12">
+              <el-col :span="8">
                 <span class="name">温度</span>
                 <span class="value">{{ item.temperature }}</span>
+              </el-col>
+              <el-col :span="8">
+                <span class="name">湿度</span>
+                <span class="value">{{ item.humidity }}</span>
               </el-col>
             </el-row>
           </div>
@@ -89,6 +93,7 @@ export default defineComponent({
             name: msgData[item].name,
             heart: msgData[item].heart,
             temperature: msgData[item].temperature,
+            humidity: msgData[item].humidity,
           });
 
         });
@@ -98,10 +103,10 @@ export default defineComponent({
     onMounted(() => {
       initWebSocket();
     }),
-      onBeforeUnmount(() => {
-        console.log("websocket 断开连接")
-        websocket.close();
-      });
+    onBeforeUnmount(() => {
+      console.log("websocket 断开连接")
+      websocket.close();
+    });
 
     return {
       personList,
@@ -138,9 +143,16 @@ export default defineComponent({
   border: 1px solid #e6ebf5;
   border-radius: 4px;
   cursor: pointer;
-
+  &.alarm {
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.1);
+    box-shadow: 0 2px 12px 0 rgba(255, 0, 0, 10%);
+    .title {
+      border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+    }
+  }
   &:hover {
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 10%);
   }
 
   .title {
@@ -162,6 +174,9 @@ export default defineComponent({
 
       &.value {
         font-size: 34px;
+        &.alarm {
+          color: rgba(255, 0, 0, 0.6);
+        }
       }
     }
   }

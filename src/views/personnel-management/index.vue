@@ -19,6 +19,7 @@
     </div>
     <div class="qj-layout__card">
       <el-table
+        stripe
         :data="tableData"
         :header-cell-style="{ background: '#eef1f6', color: '#606266' }"
         border

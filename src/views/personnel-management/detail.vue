@@ -2,7 +2,7 @@
   <div class="detail-wrapper__full">
     <div class="detail-header">人员详情</div>
     <div class="detail-content">
-      <basic-info :userBasicInfo="userData"></basic-info>
+      <basic-info></basic-info>
 
       <div class="form-box clear-fixed">
         <el-date-picker
@@ -61,7 +61,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, reactive, toRefs } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getUserBasicInfo } from "../../api/personnel-management";
+
 import { getUserInfo } from "../../api/personnel-management";
 
 import chartLine from "../../components/Chart/line.vue";
@@ -81,7 +81,6 @@ export default defineComponent({
     let personHeart = ref([]);
     let personTemperature = ref([]);
     let personHumidity = ref([]);
-    let userData = {};
     // let personData = {
     //     time: [],
     //     heart: [],
@@ -96,9 +95,9 @@ export default defineComponent({
     //   humidity: [],
     // });
 
-    let userId: Object = {
-      userId: id,
-    };
+    // let userId: Object = {
+    //   userId: id,
+    // };
     const getTime = (time: any) => {
       const nowTimeDate = new Date(time).getTime();
       return nowTimeDate;
@@ -131,10 +130,6 @@ export default defineComponent({
       });
     };
     const featchData = () => {
-      getUserBasicInfo(userId).then((res) => {
-        userData = res.data;
-        console.log("人员数据返回", userData);
-      });
       getUserInfo({
         time: new Date().getTime(),
         userId: id,
@@ -160,9 +155,7 @@ export default defineComponent({
       personTime,
       personHeart,
       personTemperature,
-      personHumidity,
-      userData,
-      //   ...toRefs(charts),
+      personHumidity
     };
   },
 });

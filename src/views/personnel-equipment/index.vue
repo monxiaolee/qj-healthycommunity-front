@@ -19,15 +19,16 @@
     <div class="qj-layout__card">
       <el-table
         :data="tableData"
+        stripe
         :header-cell-style="{ background: '#eef1f6', color: '#606266' }"
         border
         style="width: 100%"
       >
         <el-table-column type="index" label="序号" align="center" width="60" :index="indexMethod" />
-        <el-table-column prop="deviceType" label="设备类型" width="150" />
-        <el-table-column prop="deviceId" label="设备编号" align="center"/>
+        <el-table-column prop="machineType" label="设备类型" width="150" />
+        <el-table-column prop="machineId" label="设备编号" align="center"/>
         <el-table-column prop="name" label="人员姓名" width="160" />
-        <el-table-column prop="phoneNum" label="手机号" width="200" />
+        <el-table-column prop="telephone" label="手机号" width="200" />
       </el-table>
       <div class="qj-table__footer clear-fix">
         <el-pagination background layout="prev, pager, next" :total="total" />
