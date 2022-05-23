@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '',
     redirect: (_) => {
-      return { path: '/personnelManagement' }
+      return { path: '/login' }
     },
   },
   {
