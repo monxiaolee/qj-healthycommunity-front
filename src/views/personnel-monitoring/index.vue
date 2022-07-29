@@ -88,7 +88,6 @@ export default defineComponent({
       // }
       if (msgData) {
         Object.keys(msgData).forEach((item) => {
-
           personList.push({
             name: msgData[item].name,
             heart: msgData[item].heart,

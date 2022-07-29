@@ -1,5 +1,7 @@
 <template>
-  <div class="sidebar-logo-container">LOGO</div>
+  <div class="sidebar-logo-container">
+    <div class="logo"></div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -24,9 +26,16 @@ export default defineComponent({
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  background: #1d2939;
   text-align: center;
   overflow: hidden;
   color: #fff;
+  .logo {
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../assets/jklogo.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
 }
 </style>

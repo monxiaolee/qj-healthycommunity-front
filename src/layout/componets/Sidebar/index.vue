@@ -22,6 +22,10 @@
         <el-icon><DataAnalysis /></el-icon>
         <span>人员监测</span>
       </el-menu-item>
+      <el-menu-item index="monitorCase">
+        <el-icon><Monitor /></el-icon>
+        <span>监测示例</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -42,13 +46,14 @@ import {
   User,
   Aim,
   DataAnalysis,
+  Monitor,
   Menu as IconMenu,
   Setting,
 } from '@element-plus/icons-vue'
 
 export default defineComponent({
   name: "SideBar",
-  components: {Setting, Document, Location, IconMenu, SidebarLogo, User, Aim, DataAnalysis},
+  components: {Setting, Document, Location, IconMenu, SidebarLogo, User, Aim, DataAnalysis, Monitor},
   setup(props, ctx) {
     let showLogo = true;
     const route = useRoute();
@@ -79,6 +84,7 @@ export default defineComponent({
   border: none;
   height: 100%;
   width: 100% !important;
+  background-color: #1d2939;
   .el-menu-item {
       height: 40px;
       line-height: 40px;

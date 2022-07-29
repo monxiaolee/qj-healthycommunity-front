@@ -25,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
       name: 'personnelMonitoring', //人员监测
       component: () =>
         import(/* webpackChunkName: "personnelMonitoring" */ '@/views/personnel-monitoring/index.vue'),
+    }, {
+      path: '/monitorCase',
+      name: 'monitorCase', //监测示例
+      component: () =>
+        import(/* webpackChunkName: "monitorCase" */ '@/views/monitor-case/index.vue'),
     }]
   },
   {
