@@ -43,7 +43,7 @@ export default defineComponent({
   setup(props, ctx) {
     // let socket: any = null
     // const socket = io('ws://82.157.6.212:8100')
-    const wsuri = "ws://82.157.6.212:8100";
+    const wsuri = "ws://47.114.110.104:8100";
     let websocket: any = null;
     let personList: Array<any> = reactive([]);
 
@@ -68,7 +68,7 @@ export default defineComponent({
     const webSocketMessage = (msg: any) => {
       personList.length = 0;
       console.log(msg);
-      let msgData: Object = {};
+      let msgData: any;
       try {
         msgData = JSON.parse(msg.data);
       } catch (e) {
@@ -94,7 +94,6 @@ export default defineComponent({
             temperature: msgData[item].temperature,
             humidity: msgData[item].humidity,
           });
-
         });
       }
     };
